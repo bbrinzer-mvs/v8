@@ -9,8 +9,12 @@ build --action_env=PATH
 
 # Use Clang compiler
 build:clang --action_env=BAZEL_COMPILER=clang
-build:clang --action_env=CC=clang
-build:clang --action_env=CXX=clang++
+build:clang --crosstool_top=//toolchain:cross
+build:clang --host_crosstool_top=//toolchain:native
+build:clang --action_env=CC=clang-14
+build:clang --action_env=CXX=clang++-14
+build:clang --action_env=LD=ld.lld-14
+build:clang --linkopt=-fuse-ld=lld-14
 
 # V8 debug config
 build:debug --compilation_mode=dbg
